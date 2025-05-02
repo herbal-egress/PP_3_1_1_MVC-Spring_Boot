@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS `kata_pp_db_4`.`users`
+(
+    `id`    INT          NOT NULL AUTO_INCREMENT,
+    `name`  VARCHAR(100) NOT NULL,
+    `age`   INT(3)       NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
+
+
+
+INSERT INTO kata_pp_db_4.users (name, age, email) VALUES ('Andrey VsehBodrey', 103, 'andron@mail.ru');
+INSERT INTO kata_pp_db_4.users (name, age, email) VALUES ('Katya aka Катя', 34, 'katy@mail.ru');
+INSERT INTO kata_pp_db_4.users (name, age, email) VALUES ('Vlad VsemRad', 22, 'vladik@ya.ru');
+INSERT INTO kata_pp_db_4.users (name, age, email) VALUES ('Ivan McIvan', 19, 'vanya@gmail.com');
+INSERT INTO kata_pp_db_4.users (name, age, email) VALUES ('Наша Маша', 25, '5rubley@yahoo.com');
