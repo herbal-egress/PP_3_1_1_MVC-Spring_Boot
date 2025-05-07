@@ -5,16 +5,9 @@
     <title>Обновление данных юзера</title>
 </head>
 <body>
-<!--все адреса тут в Thymeleaf, пишутся с собачкой в фигурных скобках, ссылки на объект с долларом в фигурных скобках-->
-<!-- по ключу хранится юзер, полученный по id из метода userlistDAO.show(id)
- (т.е. editkey = userlist), поэтому через ключ обращаемся к гетерам этого юзера!!!!-->
-<form th:method="PATCH" th:action="@{/users/id?id={id}(id=${editkey.getId()})}" th:object="${editkey}"> <!-- передадим PATCH
-запрос на адрес /users/(id), где id подставили из полученного юзера через ключ.
-Далее перечисление атрибутов тега form, т.е. то, что мы должны написать в адресной строке для PATCH запроса-->
+<form th:method="PATCH" th:action="@{/users/id?id={id}(id=${editkey.getId()})}" th:object="${editkey}">
     <label for="name">Enter name: </label>
-    <!-- создаём название поля, что бы понимать что в него вводить. задаём этому полю id="name"-->
-    <input type="text" th:field="*{name}" id="name"/> <!--создаём поле, в котором будет подставляться значение name из объекта User,
-    название поля по id="name"-->
+    <input type="text" th:field="*{name}" id="name"/>
     <br/>
     <label for="age">Enter age: </label>
     <input type="text" th:field="*{age}" id="age"/>
@@ -22,10 +15,9 @@
     <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email"/>
     <br/>
-    <br/> <!-- перешли на новую строку-->
-    <hr/> <!-- рисует линию-->
+    <br/>
+    <hr/>
     <input type="submit" value="Сохранить изменения в БД!"/>
-    <!--это кнопка, по которой мы отправляем PATCH-запросом данные с этой формы на /users/id-->
 </form>
 </body>
 </html>

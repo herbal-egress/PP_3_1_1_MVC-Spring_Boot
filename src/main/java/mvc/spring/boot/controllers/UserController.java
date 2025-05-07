@@ -2,63 +2,60 @@ package mvc.spring.boot.controllers;
 
 import mvc.spring.boot.dao.UserDAO;
 import mvc.spring.boot.model.User;
+import mvc.spring.boot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-// http://localhost:8080/users
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
-    private UserDAO userDAO;
+    private final UserService userService;
 
-    // возвращает всех юзеров
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @RequestMapping()
     public String allUsers(Model model) {
-        model.addAttribute("alluserskey", userDAO.allUsers());
+        model.addAttribute("alluserskey", userService.allUsers());
         return "usersview/allusers";
     }
 
-    // возвращает страницу конкретного юзера по id:
     @GetMapping("/id")
     public String userById(@RequestParam int id, Model model) {
-        model.addAttribute("userByIdkey", userDAO.userById(id));
+        model.addAttribute("userByIdkey", userService.userById(id));
         return "usersview/userById";
     }
 
-    // возвращает HTML-форму для создания нового человека:
     @GetMapping("/new")
     public String viewForNewUser(@ModelAttribute("newkey") User user) {
         return "usersview/new";
     }
 
-    // принимает POST-запрос, и ДОБАВЛЯЕТ нового юзера в БД с помощью DAO:
     @PostMapping()
     public String create(@ModelAttribute("createkey") User user) {
-        userDAO.save(user);
+        userService.save(user);
         return "redirect:/users";
     }
 
-    // вызывается для подготовки редактирования юзера
     @GetMapping("/edit/id")
     public String edit(@RequestParam int id, Model model) {
-        model.addAttribute("editkey", userDAO.userById(id));
+        model.addAttribute("editkey", userService.userById(id));
         return "usersview/edit";
     }
 
-    // отправляет запрос в БД для записи отредактированного юзера:
     @PatchMapping("/id")
     public String update(@RequestParam int id, @ModelAttribute("updatekey") User user) {
-        userDAO.update(id, user);
+        userService.update(id, user);
         return "redirect:/users";
     }
 
-    // удаляет человека по id на странице /users/id?id=
     @DeleteMapping("/id")
     public String delete(@RequestParam int id) {
-        userDAO.delete(id);
+        userService.delete(id);
         return "redirect:/users";
     }
 }

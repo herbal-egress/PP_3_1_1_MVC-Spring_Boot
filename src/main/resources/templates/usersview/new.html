@@ -5,23 +5,19 @@
     <title>Создание нового юзера</title>
 </head>
 <body>
-<!--все адреса тут в Thymeleaf, пишутся с собачкой в фигурных скобках, ссылки на объект с долларом в фигурных скобках-->
-<form th:method="POST" th:action="@{/users}" th:object="${newkey}"> <!--  -->
-    <label for="name">Enter name: </label>   <!-- создаём название поля, что бы понимать что в него вводить.
-    задаём этому полю id name-->
-    <input type="text" th:field="*{name}" id="name"/> <!--создаём поле, в котором будет указываться
-    значение name для объекта User, здесь id name относится к строке выше-->
-    <br/> <!--перешли на следующую строку-->
+<form th:method="POST" th:action="@{/users}" th:object="${newkey}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
     <label for="age">Enter age: </label>
     <input type="text" th:field="*{age}" id="age"/>
     <br/>
     <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email"/>
     <br/>
-    <br/> <!-- перешли на новую строку-->
-    <hr/> <!-- рисует линию-->
+    <br/>
+    <hr/>
     <input type="submit" value="Записать в БД!"/>
-    <!--это кнопка, по которой мы отправляем POST-запросом данные с этой формы на /users-->
 </form>
 </body>
 </html>

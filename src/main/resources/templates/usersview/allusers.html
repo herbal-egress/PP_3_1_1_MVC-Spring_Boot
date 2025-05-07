@@ -5,9 +5,7 @@
     <title>Все юзеры</title>
 </head>
 <body>
-<!--все адреса тут в Thymeleaf, пишутся с собачкой в фигурных скобках, ссылки на объект с долларом в фигурных скобках-->
-<!--рисуем таблицу из результата запроса-->
-<table border="1"> <!-- тип линии рамки -->
+<table border="1">
     <tr>
         <th>ID</th>
         <th>Имя</th>
@@ -16,8 +14,8 @@
     </tr>
     <tr th:each="user, state : ${alluserskey}"
         class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
-        <td th:utext="${state.count}">...</td> <!-- вместо ... thymeleaf подставит значение-->
-        <td> <!-- тут колонка с ячейками, содержащими ссылки на юзеров через их id-->
+        <td th:utext="${user.getId()}">...</td>
+        <td>
             <a th:href="@{/users/id?id={id}(id=${user.getId()})}"
                th:utext="${user.getName()}">...</a>
         </td>
@@ -25,8 +23,8 @@
         <td th:utext="${user.getEmail()}">...</td>
     </tr>
 </table>
-<br/> <!-- перешли на новую строку-->
-<hr/> <!-- рисует линию-->
-<a href="/users/new">Создать нового юзера</a> <!--при нажатии на эту ссылку будет переход на /users/new-->
+<br/>
+<hr/>
+<a href="/users/new">Создать нового юзера</a>
 </body>
 </html>
