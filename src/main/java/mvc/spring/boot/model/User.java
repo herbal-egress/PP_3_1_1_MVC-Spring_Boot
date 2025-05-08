@@ -3,6 +3,8 @@ package mvc.spring.boot.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -56,5 +58,26 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        User user = (User) obj;
+        if (id == 0 && user.id == 0) {
+            return age == user.age &&
+                    Objects.equals(name, user.name) &&
+                    Objects.equals(email, user.email);
+        }
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        if (id == 0) {
+            return Objects.hash(name, age, email);
+        }
+        return id;
     }
 }
